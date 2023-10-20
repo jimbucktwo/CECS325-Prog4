@@ -8,9 +8,28 @@
 
 #include <iostream>
 #include <fstream>
+#include <pthread.h>
 using namespace std;
 
-int main(int argc, char *argv[]) {
+
+void bubblesort(int arr[], int size) {
+    for (int i = 0; i < size; ++i) {
+        bool swapped = false;
+
+        for (int j = 0; j < size - 1; ++j) {
+            if (arr[j] > arr[j + 1]) {
+                swap(arr[j], arr[j + 1]);
+                swapped = true;
+            }
+        }
+
+        if (!swapped) {
+            break;
+        }
+    }
+}
+
+int main(int argc, char *argv[]) { 
     
     //prints arguments used for mysort
     for (int i=0; i<argc; i++){
@@ -49,20 +68,7 @@ int main(int argc, char *argv[]) {
     fin.close();
 
     //bubblesort algorithm
-    for (int i = 0; i < size; ++i) {
-        bool swapped = false;
-
-        for (int j = 0; j < size - 1; ++j) {
-            if (numArray[j] > numArray[j + 1]) {
-                swap(numArray[j], numArray[j + 1]);
-                swapped = true;
-            }
-        }
-
-        if (!swapped) {
-            break;
-        }
-    }
+    bubblesort(numArray, size);
 
     //creates file mysort.out to write the results into
     ofstream fout;
